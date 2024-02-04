@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        Выберите опрос для просмотра статистики
+    </h1>
+    <br>
+    {% for poll in object_list %}
+        <a href="{{ poll.get_stats_url }}">{{poll.name}}</a>
+    {% endfor %}
+{% endblock content %}

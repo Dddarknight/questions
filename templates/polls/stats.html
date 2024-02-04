@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        Статистика
+    </h1>
+    <br>
+    <div>
+        <div>
+            <div>Общее кол-во участников опроса</div>
+            <div>{{all_poll_users}}</div>
+        </div>
+        {% for question in questions %}
+            <div>{{ question.question_text }}</div>
+            <div>
+                <div>Кол-во ответивших</div>
+                <div>{{question.users_count}}</div>
+            </div>
+            <div>
+                <div>Доля ответивших от общего кол-ва участников опроса</div>
+                <div>{{question.users_part}}%</div>
+            </div>
+            <div>
+                <div>Порядковый номер по кол-ву ответивших</div>
+                <div>{{question.row_number}}</div>
+            </div>
+            <div>
+                <div>Статистика по ответам на вопрос</div>
+                {% for choice in question.choices_stats %}
+                    <div>{{ choice.choice }}</div>
+                    <div>
+                        <div>Кол-во ответивших</div>
+                        <div>{{choice.users_count}}</div>
+                    </div>
+                    <div>
+                        <div>Доля выбравших данный вариант от общего кол-ва ответивших на вопрос</div>
+                        <div>{{choice.users_part}}%</div>
+                    </div>
+                    <div>
+                        <div>Порядковый номер по кол-ву ответивших</div>
+                        <div>{{choice.row_number}}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+{% endblock content %}

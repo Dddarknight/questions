@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        Опросы
+    </h1>
+    <br>
+    {% for poll in object_list %}
+        <a href="{{ poll.get_absolute_url }}">{{poll.name}}</a>
+    {% endfor %}
+    {% if request.user.is_staff %}
+        <a href="{% url 'stats_menu' %}">Статистика</a>
+    {% else %}
+    {% endif %}
+{% endblock content %}

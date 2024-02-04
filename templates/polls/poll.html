@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        {{poll.name}}
+    </h1>
+    <br>
+    <form method="post" action="{% url 'submit_answers' %}">
+        {% csrf_token %}
+        <input type="hidden" name="poll_id" value="{{ poll.id }}" />
+        {% for question in poll.questions.all %}
+            <div>{{ question.question_text }}</div>
+            <select name="{{ question.id }}">
+                {% for choice in choices %}
+                    <option value="{{ choice.id }}">{{ choice.choice_text }}</option>
+                {% endfor %}
+            </select>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
